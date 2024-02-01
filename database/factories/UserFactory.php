@@ -51,4 +51,17 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function companyOwner(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role_id' => Role::COMPANY_OWNER->value,
+        ]);
+    }
+    public function guide(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role_id' => Role::GUIDE->value,
+        ]);
+    }
 }
