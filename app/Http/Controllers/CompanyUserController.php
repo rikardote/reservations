@@ -18,6 +18,12 @@ class CompanyUserController extends Controller
 
         return view('companies.users.index', compact('company', 'users'));
     }
+
+    public function create(Company $company)
+    {
+        return view('companies.users.create', compact('company'));
+    }
+
     public function store(StoreUserRequest $request, Company $company)
     {
         $company->users()->create([
@@ -38,6 +44,13 @@ class CompanyUserController extends Controller
     public function update(UpdateUserRequest $request, Company $company, User $user)
     {
         $user->update($request->validated());
+
+        return to_route('companies.users.index', $company);
+    }
+
+    public function destroy(Company $company, User $user)
+    {
+        $user->delete();
 
         return to_route('companies.users.index', $company);
     }
